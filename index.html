@@ -4,9 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            justify-content: center;
+            background: #f8f9fa;
+        }
+        a {
+            display: block;
+            width: 250px;
+            padding: 20px 0;
+            margin: 15px 0;
+            text-decoration: none;
+            color: #fff;
+            background: #007BFF;
+            border-radius: 8px;
+            font-size: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: background 0.2s, transform 0.2s;
+        }
+        a:hover {
+            background: #0056b3;
+            text-decoration: none;
+            transform: translateY(-2px) scale(1.03);
+        }
+
+    </style>
 </head>
 <body>
-    <a href="session/session.html">state</a><br>
+    <a href="session/session.html">state</a>
     <a href="local_storage/local_storage.html">local_storage</a>
+    <a href="api/api.html">API call</a>
+
 </body>
 </html>
