@@ -122,48 +122,47 @@ const ToDoList = {
         return -1;
     },
 
-    async loadList() {
-        const response = await fetch("https://jsonplaceholder.typicode.com/todos");
-        const json = await response.json();
-        const totalList = [];
-        const someJSON = json.slice(0, 10);
-        someJSON.forEach((item) => {
-            const task = {
-                title: item.title,
-                id: item.id,
-                isCompleted: item.completed
-            };
-            totalList.push(task);
-        });
-
-        if (totalList) {
-            this.List = totalList;
-        }
-    },
-    // loadList() {
-
-    //     return new Promise((resolve) => {
-    //         fetch("https://jsonplaceholder.typicode.com/todos")
-    //             .then(response => response.json())
-    //             .then(json => {
-    //                 const totalList = []
-    //                 const someJSON = json.slice(0, 10)
-    //                 someJSON.forEach((item) => {
-    //                     const task = {
-    //                         title: item.title,
-    //                         id: item.id,
-    //                         isCompleted: item.completed
-    //                     }
-    //                     totalList.push(task)
-    //                 })
-
-    //                 if (totalList) {
-    //                     this.List = totalList;
-    //                     resolve();
-    //                 }
-    //             })
-
+    // async loadList() {
+    //     const response = await fetch("https://jsonplaceholder.typicode.com/todos");
+    //     const json = await response.json();
+    //     const totalList = [];
+    //     const someJSON = json.slice(0, 10);
+    //     someJSON.forEach((item) => {
+    //         const task = {
+    //             title: item.title,
+    //             id: item.id,
+    //             isCompleted: item.completed
+    //         };
+    //         totalList.push(task);
     //     });
+
+    //     if (totalList) {
+    //         this.List = totalList;
+    //     }
     // },
+    loadList() {
+        return new Promise((resolve) => {
+            fetch("https://jsonplaceholder.typicode.com/todos")
+                .then(response => response.json())
+                .then(json => {
+                    const totalList = []
+                    const someJSON = json.slice(0, 10)
+                    someJSON.forEach((item) => {
+                        const task = {
+                            title: item.title,
+                            id: item.id,
+                            isCompleted: item.completed
+                        }
+                        totalList.push(task)
+                    })
+
+                    if (totalList) {
+                        this.List = totalList;
+                        resolve();
+                    }
+                })
+
+        });
+    },
 };
 ToDoList.init();
