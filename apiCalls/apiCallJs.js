@@ -20,7 +20,7 @@ const ToDoList = {
         const task = {
             title: name,
             id: Date.now(),
-            isCompleted: false,
+            completed: false,
         };
         this.addTask(task);
         this.displayTasks(this.List);
@@ -48,13 +48,13 @@ const ToDoList = {
     },
     displayTasks(taskArray = this.List) {
         document.getElementById("tasks").innerHTML = "";
-        taskArray.sort((a, b) => a.isCompleted - b.isCompleted);
+        taskArray.sort((a, b) => a.completed - b.completed);
         taskArray.forEach((task) => {
             document
                 .getElementById("tasks")
                 .insertAdjacentHTML(
                     "beforeend",
-                    this.taskHTML(task.title, task.id, task.isCompleted)
+                    this.taskHTML(task.title, task.id, task.completed)
                 );
         });
     },
@@ -110,8 +110,8 @@ const ToDoList = {
         let taskIndex = this.getIdx(id);
         if (taskIndex === -1) return;
 
-        const currentState = this.List[taskIndex].isCompleted;
-        this.List[taskIndex].isCompleted = !currentState;
+        const currentState = this.List[taskIndex].completed;
+        this.List[taskIndex].completed = !currentState;
         this.displayTasks(this.List);
     },
     getIdx(id) {
@@ -121,25 +121,6 @@ const ToDoList = {
         }
         return -1;
     },
-
-    // async loadList() {
-    //     const response = await fetch("https://jsonplaceholder.typicode.com/todos");
-    //     const json = await response.json();
-    //     const totalList = [];
-    //     const someJSON = json.slice(0, 10);
-    //     someJSON.forEach((item) => {
-    //         const task = {
-    //             title: item.title,
-    //             id: item.id,
-    //             isCompleted: item.completed
-    //         };
-    //         totalList.push(task);
-    //     });
-
-    //     if (totalList) {
-    //         this.List = totalList;
-    //     }
-    // },
     loadList() {
         return new Promise((resolve) => {
             fetch("https://jsonplaceholder.typicode.com/todos")
@@ -147,19 +128,10 @@ const ToDoList = {
                 .then(json => {
                     const totalList = []
                     const someJSON = json.slice(0, 10)
-                    someJSON.forEach((item) => {
-                        const task = {
-                            title: item.title,
-                            id: item.id,
-                            isCompleted: item.completed
-                        }
-                        totalList.push(task)
-                    })
+                    
 
-                    if (totalList) {
-                        this.List = totalList;
+                        this.List = someJSON;
                         resolve();
-                    }
                 })
 
         });
